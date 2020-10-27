@@ -11,7 +11,7 @@ object MyUtils {
   def fallingedge(x: Bool) = !x && RegNext(x)
 }
 
-class RisingBug extends RawModule {
+class RisingBug (sync: Boolean = true) extends RawModule {
   /* Input/ouput values */
   val clock = IO(Input(Clock()))
   val resetn = IO(Input(Bool()))
@@ -22,8 +22,11 @@ class RisingBug extends RawModule {
   val fall_pulse = IO(Output(Bool()))
 
   withClockAndReset(clock, ~resetn) {
-    rise_pulse := MyUtils.risingedge(pulse)
-    fall_pulse := MyUtils.fallingedge(pulse)
+
+    val spulse = if(sync) ShiftRegister(pulse, 2) else pulse
+
+    rise_pulse := MyUtils.risingedge(spulse)
+    fall_pulse := MyUtils.fallingedge(spulse)
   }
 }
 

@@ -26,8 +26,8 @@ $(PWD)/$(TOPLEVEL)_withtp.v: $(PWD)/../../hdl/$(TOPLEVEL).v
 	echo "" >> $@
 	cat $< >> $@
 
-$(PWD)/../../chisel/$(TOPLEVEL).v:  $(PWD)/../../chisel/src/main/scala/buggy/buggy.scala
-	cd $(PWD)/../../chisel/; sbt "runMain buggy.$(TOPLEVEL)Driver"
+$(PWD)/../../hdl/$(TOPLEVEL).v:  $(PWD)/../../hdl/src/main/scala/buggy/buggy.scala
+	cd $(PWD)/../../hdl/; sbt "runMain buggy.$(TOPLEVEL)Driver"
 
 mrproper:
 	rm -f $(TOPLEVEL)_withtp.v

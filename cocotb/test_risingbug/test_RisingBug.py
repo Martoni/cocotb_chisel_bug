@@ -56,7 +56,7 @@ async def rising_test(dut):
     await trb.reset()
     await Timer(340, units="ns")
     dut.pulse <= 1
-    await Timer(1499, units="ns")
+    await Timer(1495, units="ns")
     dut.pulse <= 0
     await Timer(932, units="ns")
     dut.pulse <= 1
